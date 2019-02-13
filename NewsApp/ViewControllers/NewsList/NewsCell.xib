@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsCell" rowHeight="93" id="Dkn-VF-Zb7" customClass="NewsCell" customModule="NewsApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dkn-VF-Zb7" id="bPX-tI-8cT">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="92.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AYK-lz-Bnw">
+                        <rect key="frame" x="10" y="10" width="70" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="06y-kM-8eE"/>
+                            <constraint firstAttribute="height" constant="70" id="YIF-q9-hP0"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASy-hh-jx6">
+                        <rect key="frame" x="90" y="10" width="220" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpf-jQ-2q8">
+                        <rect key="frame" x="90" y="37" width="220" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="tpf-jQ-2q8" secondAttribute="trailing" constant="10" id="17L-dD-Ifu"/>
+                    <constraint firstAttribute="trailing" secondItem="ASy-hh-jx6" secondAttribute="trailing" constant="10" id="9ug-Yr-PBU"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="AYK-lz-Bnw" secondAttribute="bottom" constant="10" id="FcQ-Mc-uEh"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tpf-jQ-2q8" secondAttribute="bottom" constant="10" id="JWw-K5-x2H"/>
+                    <constraint firstItem="tpf-jQ-2q8" firstAttribute="top" secondItem="ASy-hh-jx6" secondAttribute="bottom" constant="10" id="Mu4-qE-scy"/>
+                    <constraint firstItem="tpf-jQ-2q8" firstAttribute="leading" secondItem="AYK-lz-Bnw" secondAttribute="trailing" constant="10" id="PwS-CM-zHS"/>
+                    <constraint firstItem="ASy-hh-jx6" firstAttribute="top" secondItem="bPX-tI-8cT" secondAttribute="top" constant="10" id="Sa1-hS-ZnH"/>
+                    <constraint firstItem="AYK-lz-Bnw" firstAttribute="leading" secondItem="bPX-tI-8cT" secondAttribute="leading" constant="10" id="bwP-UF-W1J"/>
+                    <constraint firstItem="ASy-hh-jx6" firstAttribute="leading" secondItem="AYK-lz-Bnw" secondAttribute="trailing" constant="10" id="k3u-33-5IF"/>
+                    <constraint firstItem="AYK-lz-Bnw" firstAttribute="top" secondItem="bPX-tI-8cT" secondAttribute="top" constant="10" id="n04-eK-gMW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="WZD-r6-9WO"/>
+            <connections>
+                <outlet property="newsDescription" destination="tpf-jQ-2q8" id="A5h-aL-Qmh"/>
+                <outlet property="newsImg" destination="AYK-lz-Bnw" id="qgt-aO-90c"/>
+                <outlet property="title" destination="ASy-hh-jx6" id="QL5-0t-qr4"/>
+            </connections>
+            <point key="canvasLocation" x="137.59999999999999" y="162.3688155922039"/>
+        </tableViewCell>
+    </objects>
+</document>
