@@ -16,62 +16,32 @@ class NewsListVC: UIViewController {
     
     let viewModel = NewListViewModel()
     let bag = DisposeBag()
-    
-    var cache: [News] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UINib(nibName: "NewsCell", bundle: nil), forCellReuseIdentifier: "newsCell")
         initTableView()
     }
-    
+
     private func initTableView() {
+        tableView.register(UINib(nibName: "NewsCell", bundle: nil), forCellReuseIdentifier: "newsCell")
         
-        let results = viewModel.news
-            .do(
-                onNext: { [weak self] news in
-                    self?.cache = news
-                },
-                onError: { [weak self] error in
-                    DispatchQueue.main.async {
-                        self?.showError(error: error)
-                    }
+        viewModel.error.bind(
+            onNext: { [weak self] error in
+                if let nonNilError = error {
+                    self?.showAlert(message: nonNilError.localizedDescription)
+                }
             })
-            .catchError { error in
-                return Observable.empty()
-        }
+            .disposed(by: bag)
         
-        results
+        viewModel.news
             .bind(to: tableView.rx.items(cellIdentifier: "newsCell", cellType: NewsCell.self)) {
                 row, news, cell in
-                cell.title.text = news.title
-                cell.newsDescription.text = news.description
-                DispatchQueue.global().async {
-                    if news.urlToImage != nil {
-                        if let img = try? Data(contentsOf: news.urlToImage!) {
-                            DispatchQueue.main.async {
-                                cell.newsImg.image = UIImage(data: img, scale: 0.1)
-                            }
-                        }
-                    }
-                }
-                
+                cell.initCell(with: news)
             }
             .disposed(by: bag)
+        
     }
-    
-    
-    
-    private func showError(error: Error) {
-        if let error = error as? NewsService.ApiError {
-            switch error {
-            case .wentWrong : showAlert(message: "Something went wrong")
-            }
-        } else {
-            showAlert(message: "Error occurred")
-        }
-    }
-    
+
     private func showAlert(message: String) {
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -79,4 +49,3 @@ class NewsListVC: UIViewController {
     }
     
 }
-

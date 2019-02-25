@@ -7,16 +7,13 @@
 //
 
 import RxSwift
+import RealmSwift
 
 class NewsService {
     
     private let urlString = "https://newsapi.org/v2/top-headlines?country=us&apiKey=c688ec688ceb44fa9023b959a4b2ac8d"
     
-    enum ApiError: Error {
-        case wentWrong
-    }
-    
-    public func fetchNews() -> Observable<[News]> {
+    public func fetchNews() -> Observable<[NewsDecodable]> {
         guard let url = URL(string: urlString) else { return Observable.empty() }
         
         let request: Observable<URLRequest> = Observable.create {
@@ -33,8 +30,8 @@ class NewsService {
             return URLSession.shared.rx.response(request: request).map {
                 response, data in
                 if 200 ..< 300 ~= response.statusCode {
-                    let result = try JSONDecoder().decode(NewsDecodable.self, from: data)
-                    return result.news
+                    let news = try JSONDecoder().decode(NewsWrapper.self, from: data)
+                    return news.news
                 } else {
                     throw ApiError.wentWrong
                 }
@@ -42,5 +39,9 @@ class NewsService {
         }
     }
     
-    
+    func getData(from url: URL) -> Observable<Data> {
+        let request = URLRequest(url: url)
+        return URLSession.shared.rx.data(request: request)
+    }
+
 }
