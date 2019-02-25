@@ -14,8 +14,8 @@ class NewsListVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let viewModel = NewListViewModel()
-    let bag = DisposeBag()
+    private let viewModel = NewViewModel()
+    private let bag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +40,13 @@ class NewsListVC: UIViewController {
             }
             .disposed(by: bag)
         
+        tableView.rx.modelSelected(News.self).subscribe {
+            [weak self] newsEvent in
+            let vc = NewsDetailVC(nibName: "NewsDetailVC", bundle: nil)
+            vc.news = newsEvent.element
+            self?.navigationController!.pushViewController(vc , animated: true)
+        }
+        .disposed(by: bag)
     }
 
     private func showAlert(message: String) {
@@ -48,4 +55,12 @@ class NewsListVC: UIViewController {
         present(alertController, animated: true)
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.destination is NewsDetailVC {
+//            let vc = segue.destination as! NewsDetailVC
+//            vc =
+//        }
+//    }
+    
 }
+

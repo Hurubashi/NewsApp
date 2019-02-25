@@ -11,7 +11,7 @@ import RxCocoa
 import RealmSwift
 import RxRealm
 
-class NewListViewModel {
+class NewViewModel {
 
     private let newsService: NewsService
     private let bag = DisposeBag()
@@ -75,7 +75,6 @@ class NewListViewModel {
         
         if let elem = newsByTitle.first {
             try! realm.write {
-                print("lalal")
                 elem.image = data
             }
         }
